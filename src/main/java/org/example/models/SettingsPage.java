@@ -5,6 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SettingsPage extends Page{
     public SettingsPage(WebDriver driver){
         super(driver);
@@ -14,6 +17,15 @@ public class SettingsPage extends Page{
         Util.waitUntilPageLoads(driver, 10);
         WebElement profButton = Util.getElementBySelector(driver, By.xpath("/html/body/div[1]/div/div[3]/div[1]/div/div[2]/ul/ul/li[2]/a\n"));
         profButton.click();
+    }
+
+    public MainPage exit(){
+        Util.waitUntilPageLoads(driver, 10);
+        WebElement exitButton = Util.getElementBySelector(driver, By.xpath("/html/body/div[1]/div/div[3]/div[1]/div/div[2]/ul/div[3]/button\n"));
+        exitButton.click();
+        List<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(0));
+        return new MainPage(this.driver);
     }
 
     public void changeLanguageToEng(){

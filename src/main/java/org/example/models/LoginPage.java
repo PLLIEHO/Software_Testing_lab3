@@ -28,8 +28,7 @@ public class LoginPage extends Page{
         authButton.click();
         try {
             Thread.sleep(5000);
-            List<String> tabs = new ArrayList<>(driver.getWindowHandles());
-            driver.switchTo().window(tabs.get(0));
+
             return new ProfilePage(this.driver);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);

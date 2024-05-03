@@ -26,30 +26,30 @@ public class Util {
 
     public static List<WebDriver> getDrivers() {
         List<WebDriver> drivers = new ArrayList<>();
-        drivers.add(getChromeDriver());
-        return drivers;
-//        try {
-//            List<String> properties = Files.readAllLines(Paths.get("wordpress.properties"));
-//            for (String property : properties) {
-//                if (property.startsWith("WEB_DRIVER")) {
-//                    switch (property.toLowerCase().split("=")[1]) {
-//                        case "chrome":
-//                            drivers.add(getChromeDriver());
-//                            return drivers;
-//                        case "firefox":
-//                            drivers.add(getFirefoxDriver());
-//                            return drivers;
-//                        case "both":
-//                            drivers.add(getChromeDriver());
-//                            drivers.add(getFirefoxDriver());
-//                            return drivers;
-//                    }
-//                }
-//            }
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//        throw new RuntimeException("Web driver is not specified");
+//        drivers.add(getChromeDriver());
+//        return drivers;
+        try {
+            List<String> properties = Files.readAllLines(Paths.get("wordpress.properties"));
+            for (String property : properties) {
+                if (property.startsWith("WEB_DRIVER")) {
+                    switch (property.toLowerCase().split("=")[1]) {
+                        case "chrome":
+                            drivers.add(getChromeDriver());
+                            return drivers;
+                        case "firefox":
+                            drivers.add(getFirefoxDriver());
+                            return drivers;
+                        case "both":
+                            drivers.add(getChromeDriver());
+                            drivers.add(getFirefoxDriver());
+                            return drivers;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        throw new RuntimeException("Web driver is not specified");
     }
 
     private static ChromeDriver getChromeDriver() {

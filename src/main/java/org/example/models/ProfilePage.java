@@ -18,8 +18,7 @@ public class ProfilePage extends Page{
         Util.waitUntilPageLoads(driver, 10);
         WebElement statsButton = Util.getElementBySelector(driver, By.xpath("//span[@data-e2e-sidebar='Статистика']\n"));
         statsButton.click();
-        List<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(0));
+
         return new ProfilePage(this.driver);
     }
 
@@ -37,8 +36,7 @@ public class ProfilePage extends Page{
         Util.waitUntilPageLoads(driver, 10);
         WebElement tenButton = Util.getElementBySelector(driver, By.xpath("/html/body/div[1]/div/div[3]/div[2]/main/div/div[2]/div[1]/div/div/div/ul/li[2]/a\n"));
         tenButton.click();
-        List<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(0));
+
         return new ProfilePage(this.driver);
     }
 
@@ -52,8 +50,7 @@ public class ProfilePage extends Page{
         Util.waitUntilPageLoads(driver, 10);
         WebElement subButton = Util.getElementBySelector(driver, By.xpath("//a[@href='/stats/subscribers/mgribov259.wordpress.com']\n"));
         subButton.click();
-        List<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(0));
+
         return new ProfilePage(this.driver);
     }
 
@@ -67,8 +64,7 @@ public class ProfilePage extends Page{
         Util.waitUntilPageLoads(driver, 10);
         WebElement paidButton = Util.getElementBySelector(driver, By.xpath("/html/body/div[1]/div/div[3]/div[1]/div/ul/li[4]/ul/li[1]/a/span[2]\n"));
         paidButton.click();
-        List<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(0));
+
         return new ProfilePage(this.driver);
     }
 
@@ -88,8 +84,7 @@ public class ProfilePage extends Page{
         Util.waitUntilPageLoads(driver, 10);
         WebElement blogButton = Util.getElementBySelector(driver, By.xpath("/html/body/div[1]/div/div[3]/div[1]/div/ul/li[8]/ul/li[1]/a/span[2]\n"));
         blogButton.click();
-        List<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(0));
+
         return new ProfilePage(this.driver);
     }
 
@@ -97,8 +92,7 @@ public class ProfilePage extends Page{
         Util.waitUntilPageLoads(driver, 10);
         WebElement setButton = Util.getElementBySelector(driver, By.xpath("/html/body/div[1]/div/div[1]/header/div[3]/a[1]/span/img\n"));
         setButton.click();
-        List<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(0));
+
         return new SettingsPage(this.driver);
     }
 //TODO: разобраться, как через XPath доковыряться до модального окна, открытого в отдельном #document
