@@ -1,45 +1,41 @@
-
-import org.example.Util;
-import org.example.models.FeaturesPage;
-import org.example.models.MainPage;
-import org.example.models.Page;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import ru.mikhail.Utils;
+import ru.mikhail.models.FeaturesPage;
+import ru.mikhail.models.MainPage;
 
+import java.io.IOException;
 import java.util.stream.Stream;
 
-
 public class GuestTest {
-
-    @BeforeAll
-    static void prepareDrivers() {
-        Util.prepareDrivers();
-    }
-
-
     //Тест на просмотр страницы "инженеры поддержки"
     @TestFactory
-    public Stream<DynamicTest> testEngineers() {
-        return Util.getDrivers().stream().map(driver -> DynamicTest.dynamicTest("Просмотр страницы \"инженеры поддержки\" " + driver.getClass(),
-                () -> {
-                    try {
-                        driver.manage().deleteAllCookies();
-                        MainPage mainPage = new MainPage(driver);
-                        driver.get(Util.BASE_URL);
-                        FeaturesPage featuresPage = mainPage.goToFeaturesPage();
+    public Stream<DynamicTest> testEngineers() throws IOException {
+        return TestUtils.boilerplate("Просмотр страницы \"инженеры поддержки\"", (driver, driverManager) -> {
+            MainPage mainPage = new MainPage(driver);
+            driver.get(driverManager.getUrl());
+            FeaturesPage featuresPage = mainPage.goToFeaturesPage();
 
-                        Assertions.assertTrue(featuresPage.getDriver().getCurrentUrl().contains("https://wordpress.com/ru/features"));
+            Assertions.assertTrue(driver.getCurrentUrl().contains("https://wordpress.com/ru/features"));
 
-                        Page page = featuresPage.goToSupportEngineers();
-                        Assertions.assertTrue(page.getDriver().getCurrentUrl().contains("https://wordpress.com/ru/expert-support/"));
+            featuresPage.goToSupportEngineers();
+            Assertions.assertTrue(driver.getCurrentUrl().contains("https://wordpress.com/ru/expert-support/"));
+        });
+    }
 
-                    } finally {
-                        driver.quit();
-                    }
-                }));
+    // Тест на просмотр страницы с руководствами
+    @TestFactory
+    public Stream<DynamicTest> testSupport() throws IOException {
+        return TestUtils.boilerplate("Просмотр страницы с руководствами", (driver, driverManager) -> {
+            MainPage mainPage = new MainPage(driver);
+            driver.get(driverManager.getUrl());
+            mainPage.goToSupportPage();
+
+            Assertions.assertTrue(driver.getCurrentUrl().contains("https://wordpress.com/ru/support"));
+            var subTitle = Utils.getElementBySelector(driver, By.xpath("/html/body/div[3]/div/div/div/p"));
+            Assertions.assertEquals("Находите ресурсы поддержки и документацию для WordPress.com", subTitle.getText());
+        });
     }
 }
